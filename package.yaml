@@ -1,0 +1,49 @@
+name:                stackell
+version:             0.1.0
+homepage:            https://github.com/matsubara0507/stackell#readme
+license:             MIT
+author:              MATSUBARA Nobutada
+maintainer:          t12307043@gunma-u.ac.jp
+copyright:           MATSUBARA Nobutada
+category:            Web
+description:         Please see the README on GitHub at <https://github.com/matsubara0507/stackell#readme>
+
+extra-source-files:
+- README.md
+- CHANGELOG.md
+
+ghc-options:
+- -Wall
+- -Wcompat
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wredundant-constraints
+
+default-extensions:
+- ConstraintKinds
+- DataKinds
+- FlexibleContexts
+- FlexibleInstances
+- GeneralizedNewtypeDeriving
+- OverloadedLabels
+- OverloadedStrings
+- PolyKinds
+- RankNTypes
+- StandaloneDeriving
+- TypeFamilies
+- TypeOperators
+- TypeSynonymInstances
+
+dependencies:
+- aeson
+- base >= 4.7 && < 5
+- bytestring
+- extensible >= 0.6.0
+- req >= 2.0.0
+- simple-api
+- text
+- unordered-containers
+- microlens
+
+library:
+  source-dirs: src

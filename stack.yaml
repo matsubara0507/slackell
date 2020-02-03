@@ -1,0 +1,9 @@
+resolver: lts-14.22
+packages:
+- .
+- lib/simple-api
+extra-deps:
+- membership-0
+- req-3.0.0
+- github: fumieval/extensible
+  commit: d197daaef0ae18b9734384b8f0efa5783bc629e9
