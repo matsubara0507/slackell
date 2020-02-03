@@ -1,0 +1,47 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.2.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 6ccd6853e66053123199596452922e128fff52478a426b7e9bb590c0b2c15672
+
+name:           slackell
+version:        0.1.0
+description:    Please see the README on GitHub at <https://github.com/matsubara0507/slackell#readme>
+category:       Web
+homepage:       https://github.com/matsubara0507/slackell#readme
+author:         MATSUBARA Nobutada
+maintainer:     t12307043@gunma-u.ac.jp
+copyright:      MATSUBARA Nobutada
+license:        MIT
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    CHANGELOG.md
+
+library
+  exposed-modules:
+      Web.Slack.Client
+      Web.Slack.Type
+      Web.Slack.WebAPI
+      Web.Slack.WebAPI.Conversations
+      Web.Slack.WebAPI.Internal
+  other-modules:
+      Paths_slackell
+  hs-source-dirs:
+      src
+  default-extensions: ConstraintKinds DataKinds FlexibleContexts FlexibleInstances GeneralizedNewtypeDeriving OverloadedLabels OverloadedStrings PolyKinds RankNTypes StandaloneDeriving TypeFamilies TypeOperators TypeSynonymInstances
+  ghc-options: -Wall -Wcompat -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints
+  build-depends:
+      aeson
+    , base >=4.7 && <5
+    , bytestring
+    , extensible >=0.6.0
+    , microlens
+    , req >=2.0.0
+    , simple-api
+    , text
+    , unordered-containers
+  default-language: Haskell2010

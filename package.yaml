@@ -1,12 +1,12 @@
-name:                stackell
+name:                slackell
 version:             0.1.0
-homepage:            https://github.com/matsubara0507/stackell#readme
+homepage:            https://github.com/matsubara0507/slackell#readme
 license:             MIT
 author:              MATSUBARA Nobutada
 maintainer:          t12307043@gunma-u.ac.jp
 copyright:           MATSUBARA Nobutada
 category:            Web
-description:         Please see the README on GitHub at <https://github.com/matsubara0507/stackell#readme>
+description:         Please see the README on GitHub at <https://github.com/matsubara0507/slackell#readme>
 
 extra-source-files:
 - README.md

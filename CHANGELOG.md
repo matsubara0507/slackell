@@ -1,3 +1,3 @@
-# Changelog for stackell
+# Changelog for slackell
 
 ## Unreleased changes
