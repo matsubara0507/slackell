@@ -1,0 +1,42 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.2.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 220f3a1b385ddf32980ccbcb59d775c463c4dcba6b8879ec132bbf0bd6e7bbdf
+
+name:           simple-api
+version:        0.1.0
+description:    Please see the README on GitHub at <https://github.com/matsubara0507/simple-api#readme>
+category:       Web
+homepage:       https://github.com/matsubara0507/simple-api#readme
+author:         MATSUBARA Nobutada
+maintainer:     t12307043@gunma-u.ac.jp
+copyright:      MATSUBARA Nobutada
+license:        MIT
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    CHANGELOG.md
+
+library
+  exposed-modules:
+      Network.Simple
+      Network.Simple.Client
+      Network.Simple.OptionalParams
+  other-modules:
+      Paths_simple_api
+  hs-source-dirs:
+      src
+  default-extensions: ConstraintKinds DataKinds FlexibleContexts FlexibleInstances GeneralizedNewtypeDeriving OverloadedStrings PolyKinds RankNTypes StandaloneDeriving TypeApplications TypeFamilies TypeOperators TypeSynonymInstances
+  ghc-options: -Wall -Wcompat -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints
+  build-depends:
+      aeson
+    , base >=4.7 && <5
+    , extensible >=0.6.0
+    , http-api-data
+    , req >=2.0.0
+    , text
+  default-language: Haskell2010
