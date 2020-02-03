@@ -40,7 +40,7 @@ import           Web.Slack.Type            as Slack
 import           Web.Slack.WebAPI.Internal
 
 buildUrl :: Client c => c -> Text -> Url (ClientScheme c)
-buildUrl c path = baseUrl c /: "conversations." <> path
+buildUrl c path = baseUrl c /: "api" /: "conversations." <> path
 
 -- | API for conversations
 

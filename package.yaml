@@ -25,6 +25,7 @@ default-extensions:
 - FlexibleContexts
 - FlexibleInstances
 - GeneralizedNewtypeDeriving
+- LambdaCase
 - OverloadedLabels
 - OverloadedStrings
 - PolyKinds
@@ -47,3 +48,14 @@ dependencies:
 
 library:
   source-dirs: src
+
+tests:
+  spec:
+    main:                Spec.hs
+    source-dirs:         test
+    dependencies:
+    - slackell
+    - servant-server
+    - tasty
+    - tasty-hspec
+    - warp

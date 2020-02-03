@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 6ccd6853e66053123199596452922e128fff52478a426b7e9bb590c0b2c15672
+-- hash: 3a0e6fa3f984dca0f758db71f8fdd7c69b5f67933031faba4c543f1196c0be6c
 
 name:           slackell
 version:        0.1.0
@@ -23,6 +23,7 @@ extra-source-files:
 
 library
   exposed-modules:
+      Web.Slack
       Web.Slack.Client
       Web.Slack.Type
       Web.Slack.WebAPI
@@ -32,7 +33,7 @@ library
       Paths_slackell
   hs-source-dirs:
       src
-  default-extensions: ConstraintKinds DataKinds FlexibleContexts FlexibleInstances GeneralizedNewtypeDeriving OverloadedLabels OverloadedStrings PolyKinds RankNTypes StandaloneDeriving TypeFamilies TypeOperators TypeSynonymInstances
+  default-extensions: ConstraintKinds DataKinds FlexibleContexts FlexibleInstances GeneralizedNewtypeDeriving LambdaCase OverloadedLabels OverloadedStrings PolyKinds RankNTypes StandaloneDeriving TypeFamilies TypeOperators TypeSynonymInstances
   ghc-options: -Wall -Wcompat -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints
   build-depends:
       aeson
@@ -44,4 +45,35 @@ library
     , simple-api
     , text
     , unordered-containers
+  default-language: Haskell2010
+
+test-suite spec
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Spec.Web.Slack.WebAPI.Conversations
+      Web.Slack.Test.Client
+      Web.Slack.Test.Helper
+      Web.Slack.Test.MockServer
+      Web.Slack.Test.WebAPI
+      Paths_slackell
+  hs-source-dirs:
+      test
+  default-extensions: ConstraintKinds DataKinds FlexibleContexts FlexibleInstances GeneralizedNewtypeDeriving LambdaCase OverloadedLabels OverloadedStrings PolyKinds RankNTypes StandaloneDeriving TypeFamilies TypeOperators TypeSynonymInstances
+  ghc-options: -Wall -Wcompat -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints
+  build-depends:
+      aeson
+    , base >=4.7 && <5
+    , bytestring
+    , extensible >=0.6.0
+    , microlens
+    , req >=2.0.0
+    , servant-server
+    , simple-api
+    , slackell
+    , tasty
+    , tasty-hspec
+    , text
+    , unordered-containers
+    , warp
   default-language: Haskell2010
