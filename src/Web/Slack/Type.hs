@@ -2,7 +2,9 @@ module Web.Slack.Type
     ( Ok (..)
     , ChannelID
     , UserID
+    , TeamID
     , TimeStamp
+    , ColorCode
     , Conversation
     , ChannelTopic
     , ChannelType (..)
@@ -12,6 +14,11 @@ module Web.Slack.Type
     , toDirectMessage
     , Message
     , Reply
+    , User
+    , Profile
+    , Presence
+    , UserIdentity
+    , TeamIdentity
     ) where
 
 import           Data.Aeson                    (FromJSON (..), ToJSON (..),
@@ -20,7 +27,7 @@ import qualified Data.Aeson                    as J
 import           Data.Extensible
 import qualified Data.HashMap.Strict           as HM
 import           Data.Int                      (Int64)
-import           Data.Text                     (Text)
+import           Data.Text                     (Text, unpack)
 import           Lens.Micro                    ((^.))
 import           Network.Simple.OptionalParams (ToHttpApiData' (..))
 
@@ -41,8 +48,10 @@ instance ToJSON a => ToJSON (Ok a) where
 
 type ChannelID = Text
 type UserID = Text
+type TeamID = Text
 
 type TimeStamp = Text
+type ColorCode = Text
 
 type Conversation = Record
   '[ "id"                    >: ChannelID
@@ -176,4 +185,76 @@ type Message = Record
 type Reply = Record
   '[ "user" >: UserID
    , "ts"   >: TimeStamp
+   ]
+
+type User = Record
+  '[ "id"                  >: UserID
+   , "team_id"             >: TeamID
+   , "name"                >: Text
+   , "deleted"             >: Bool
+   , "color"               >: Maybe ColorCode
+   , "real_name"           >: Maybe Text
+   , "tz"                  >: Maybe Text
+   , "tz_label"            >: Maybe Text
+   , "tz_offset"           >: Maybe Int
+   , "profile"             >: Profile
+   , "is_admin"            >: Maybe Bool
+   , "is_owner"            >: Maybe Bool
+   , "is_primary_owner"    >: Maybe Bool
+   , "is_restricted"       >: Maybe Bool
+   , "is_ultra_restricted" >: Maybe Bool
+   , "is_bot"              >: Bool
+   , "updated"             >: Int64
+   , "is_app_user"         >: Maybe Bool
+   , "has_2fa"             >: Maybe Bool
+   ]
+
+type Profile = Record
+  '[ "avatar_hash"             >: Text
+   , "status_text"             >: Maybe Text
+   , "status_emoji"            >: Maybe Text
+   , "real_name"               >: Text
+   , "display_name"            >: Text
+   , "real_name_normalized"    >: Text
+   , "display_name_normalized" >: Text
+   , "email"                   >: Maybe Text
+   , "image_original"          >: Maybe Text
+   , "image_24"                >: Text
+   , "image_32"                >: Text
+   , "image_48"                >: Text
+   , "image_72"                >: Text
+   , "image_192"               >: Text
+   , "image_512"               >: Text
+   , "team"                    >: Maybe Text
+   ]
+
+data Presence
+  = Active
+  | Away
+  deriving (Show, Eq)
+
+instance FromJSON Presence where
+  parseJSON = J.withText "Presence" $ \case
+    "active" -> pure Active
+    "away"   -> pure Away
+    txt      -> fail $ "\"" <> unpack txt <> "\" is not Presence"
+
+instance ToJSON Presence where
+  toJSON Active = J.String "active"
+  toJSON Away   = J.String "away"
+
+type UserIdentity = Record
+  '[ "id"        >: UserID
+   , "name"      >: Text
+   , "email"     >: Maybe Text
+   , "image_24"  >: Maybe Text
+   , "image_32"  >: Maybe Text
+   , "image_48"  >: Maybe Text
+   , "image_72"  >: Maybe Text
+   , "image_192" >: Maybe Text
+   ]
+
+type TeamIdentity = Record
+  '[ "id"   >: TeamID
+   , "name" >: Maybe Text
    ]

@@ -31,6 +31,7 @@ default-extensions:
 - PolyKinds
 - RankNTypes
 - StandaloneDeriving
+- TypeApplications
 - TypeFamilies
 - TypeOperators
 - TypeSynonymInstances

@@ -1,35 +1,38 @@
 module Web.Slack.Test.WebAPI where
 
 import           Data.Extensible
-import           Data.Text             (Text)
+import           Data.Text                      (Text)
 import           Servant
-import qualified Web.Slack             as Slack
-import           Web.Slack.Test.Helper (returnJsonFile)
+import qualified Web.Slack                      as Slack
+import           Web.Slack.Test.Helper          (returnJsonFile)
+import           Web.Slack.WebAPI.Conversations (CloseResule, Conversations,
+                                                 Members, Messages, OpenResult,
+                                                 Replies)
+import           Web.Slack.WebAPI.Users         (IdentityResult, Users)
 
-type API = "api" :> ConversationsAPI
+type API = "api" :> (ConversationsAPI :<|> UsersAPI)
 
 server :: Server API
-server = conversations
+server = conversations :<|> users
 
 type ConversationsAPI
      = "conversations.archive"    :> Post '[JSON] (Slack.Ok (Record '[ "ok" >: Bool ]))
-  :<|> "conversations.close"      :> Post '[JSON] (Slack.Ok Slack.CloseResule)
+  :<|> "conversations.close"      :> Post '[JSON] (Slack.Ok CloseResule)
   :<|> "conversations.create"     :> Post '[JSON] (Slack.Ok (Record '[ "channel" >: Slack.Conversation ]))
-  :<|> "conversations.history"    :> Get '[JSON] (Slack.Ok Slack.Messages)
+  :<|> "conversations.history"    :> Get '[JSON] (Slack.Ok Messages)
   :<|> "conversations.info"       :> Get '[JSON] (Slack.Ok (Record '[ "channel" >: Slack.Conversation ]))
   :<|> "conversations.invite"     :> Post '[JSON] (Slack.Ok (Record '[ "channel" >: Slack.Conversation ]))
   :<|> "conversations.join"       :> Post '[JSON] (Slack.Ok (Record '[ "channel" >: Slack.Conversation ]))
   :<|> "conversations.kick"       :> Post '[JSON] (Slack.Ok (Record '[ "ok" >: Bool ]))
   :<|> "conversations.leave"      :> Post '[JSON] (Slack.Ok (Record '[ "not_in_channel" >: Maybe Bool ]))
-  :<|> "conversations.list"       :> Get '[JSON] (Slack.Ok Slack.Conversations)
-  :<|> "conversations.members"    :> Get '[JSON] (Slack.Ok Slack.Members)
-  :<|> "conversations.open"       :> Post '[JSON] (Slack.Ok Slack.OpenResult)
+  :<|> "conversations.list"       :> Get '[JSON] (Slack.Ok Conversations)
+  :<|> "conversations.members"    :> Get '[JSON] (Slack.Ok Members)
+  :<|> "conversations.open"       :> Post '[JSON] (Slack.Ok OpenResult)
   :<|> "conversations.rename"     :> Post '[JSON] (Slack.Ok (Record '[ "channel" >: Slack.Conversation ]))
-  :<|> "conversations.replies"    :> Get '[JSON] (Slack.Ok Slack.Replies)
+  :<|> "conversations.replies"    :> Get '[JSON] (Slack.Ok Replies)
   :<|> "conversations.setPurpose" :> Post '[JSON] (Slack.Ok (Record '[ "purpose" >: Text ]))
   :<|> "conversations.setTopic"   :> Post '[JSON] (Slack.Ok (Record '[ "topic" >: Text ]))
   :<|> "conversations.unarchive"  :> Post '[JSON] (Slack.Ok (Record '[ "ok" >: Bool ]))
-
 
 conversations :: Server ConversationsAPI
 conversations
@@ -68,3 +71,36 @@ conversations
     conversationsSetPurpose = returnJsonFile "test/fixture/webapi/purpose.json"
     conversationsSetTopic = returnJsonFile "test/fixture/webapi/topic.json"
     conversationsUnarchive = returnJsonFile "test/fixture/webapi/ok.json"
+
+type UsersAPI
+     = "users.conversations" :> Get '[JSON] (Slack.Ok Conversations)
+  :<|> "users.deletePhoto"   :> Post '[JSON] (Slack.Ok (Record '[ "ok" >: Bool ]))
+  :<|> "users.getPresence"   :> Get '[JSON] (Slack.Ok (Record '[ "presence" >: Slack.Presence ]))
+  :<|> "users.identity"      :> Get '[JSON] (Slack.Ok IdentityResult)
+  :<|> "users.info"          :> Get '[JSON] (Slack.Ok (Record '[ "user" >: Slack.User ]))
+  :<|> "users.list"          :> Get '[JSON] (Slack.Ok Users)
+  :<|> "users.lookupByEmail" :> Get '[JSON] (Slack.Ok (Record '[ "user" >: Slack.User ]))
+  :<|> "users.setActive"     :> Post '[JSON] (Slack.Ok (Record '[ "ok" >: Bool ]))
+  :<|> "users.setPresence"   :> Post '[JSON] (Slack.Ok (Record '[ "ok" >: Bool ]))
+
+users :: Server UsersAPI
+users
+     = usersConversations
+  :<|> usersDeletePhoto
+  :<|> usersGetPresence
+  :<|> usersIdentity
+  :<|> usersInfo
+  :<|> usersList
+  :<|> usersLookupByEmail
+  :<|> usersSetActive
+  :<|> usersSetPresence
+  where
+    usersConversations = returnJsonFile "test/fixture/webapi/conversations.json"
+    usersDeletePhoto = returnJsonFile "test/fixture/webapi/ok.json"
+    usersGetPresence = returnJsonFile "test/fixture/webapi/presence.json"
+    usersIdentity = returnJsonFile "test/fixture/webapi/identity.json"
+    usersInfo = returnJsonFile "test/fixture/webapi/user.json"
+    usersList = returnJsonFile "test/fixture/webapi/users.json"
+    usersLookupByEmail = returnJsonFile "test/fixture/webapi/user.json"
+    usersSetActive = returnJsonFile "test/fixture/webapi/ok.json"
+    usersSetPresence = returnJsonFile "test/fixture/webapi/ok.json"
