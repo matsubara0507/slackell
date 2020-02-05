@@ -4,4 +4,4 @@ module Web.Slack
 
 import           Web.Slack.Client as X
 import           Web.Slack.Type   as X
-import           Web.Slack.WebAPI as X hiding (run)
+import           Web.Slack.WebAPI as X

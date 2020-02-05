@@ -7,7 +7,7 @@ import           Network.HTTP.Req
 import           Network.Simple.Client (Client (..), buildApi)
 import           Web.Slack.Type        as Slack
 
-type SlackApiResponse r = JsonResponse (Slack.Ok r)
+type WebApiResponse r = JsonResponse (Slack.Ok r)
 
 type NextCursor = '[ "next_cursor" >: Text ]
 
@@ -16,7 +16,7 @@ buildGetApi ::
   => c                             -- ^ client
   -> Url (ClientScheme c)          -- ^ Location of resource
   -> Option (ClientScheme c)       -- ^ request params
-  -> m (SlackApiResponse r)
+  -> m (WebApiResponse r)
 buildGetApi c url params = buildApi c GET url NoReqBody params
 
 buildPostApi ::
@@ -24,5 +24,5 @@ buildPostApi ::
   => c                             -- ^ client
   -> Url (ClientScheme c)          -- ^ Location of resource
   -> Option (ClientScheme c)       -- ^ request params
-  -> m (SlackApiResponse r)
+  -> m (WebApiResponse r)
 buildPostApi c url params = buildApi c POST url NoReqBody params

@@ -48,7 +48,7 @@ archive
   :: (MonadHttp m, Client c)
   => c
   -> Slack.ChannelID
-  -> m (SlackApiResponse (Record '[ "ok" >: Bool ]))
+  -> m (WebApiResponse (Record '[ "ok" >: Bool ]))
 archive client cid =
   buildPostApi client (buildUrl client "archive") ("channel" =: cid)
 
@@ -61,7 +61,7 @@ close
   :: (MonadHttp m, Client c)
   => c
   -> Slack.ChannelID
-  -> m (SlackApiResponse CloseResule)
+  -> m (WebApiResponse CloseResule)
 close client cid = buildPostApi client (buildUrl client "close") ("channel" =: cid)
 
 type CreateParams = OptionalParams
@@ -74,7 +74,7 @@ create
   => c
   -> Text -- ^ channel name
   -> CreateParams
-  -> m (SlackApiResponse (Record '[ "channel" >: Slack.Conversation ]))
+  -> m (WebApiResponse (Record '[ "channel" >: Slack.Conversation ]))
 create client cname =
   buildPostApi client (buildUrl client "create") . ("name" =: cname <>) . buildRequestParams
 
@@ -98,7 +98,7 @@ history
   => c
   -> Slack.ChannelID
   -> HistoryParams
-  -> m (SlackApiResponse Messages)
+  -> m (WebApiResponse Messages)
 history client cid =
   buildGetApi client (buildUrl client "history") . ("channel" =: cid <>) . buildRequestParams
 
@@ -112,7 +112,7 @@ info
   => c
   -> Slack.ChannelID
   -> InfoParams
-  -> m (SlackApiResponse (Record '[ "channel" >: Slack.Conversation ]))
+  -> m (WebApiResponse (Record '[ "channel" >: Slack.Conversation ]))
 info client cid =
   buildGetApi client (buildUrl client "info") . ("channel" =: cid <>) . buildRequestParams
 
@@ -121,7 +121,7 @@ invite
   => c
   -> Slack.ChannelID
   -> [Slack.UserID]
-  -> m (SlackApiResponse (Record '[ "channel" >: Slack.Conversation ]))
+  -> m (WebApiResponse (Record '[ "channel" >: Slack.Conversation ]))
 invite client cid uids = buildPostApi client (buildUrl client "invite") opts
   where
     opts = "channel" =: cid <> "users" =: toQueryParam' uids
@@ -130,7 +130,7 @@ join
   :: (MonadHttp m, Client c)
   => c
   -> Slack.ChannelID
-  -> m (SlackApiResponse (Record '[ "channel" >: Slack.Conversation ]))
+  -> m (WebApiResponse (Record '[ "channel" >: Slack.Conversation ]))
 join client cid =
   buildPostApi client (buildUrl client "join") ("channel" =: cid)
 
@@ -139,7 +139,7 @@ kick
   => c
   -> Slack.ChannelID
   -> Slack.UserID
-  -> m (SlackApiResponse (Record '[ "ok" >: Bool ]))
+  -> m (WebApiResponse (Record '[ "ok" >: Bool ]))
 kick client cid uid =
   buildPostApi client (buildUrl client "kick") ("channel" =: cid <> "user" =: uid)
 
@@ -147,7 +147,7 @@ leave
   :: (MonadHttp m, Client c)
   => c
   -> Slack.ChannelID
-  -> m (SlackApiResponse (Record '[ "not_in_channel" >: Maybe Bool ]))
+  -> m (WebApiResponse (Record '[ "not_in_channel" >: Maybe Bool ]))
 leave client cid =
   buildPostApi client (buildUrl client "leave") ("channel" =: cid)
 
@@ -165,7 +165,7 @@ type ListParams = OptionalParams
 
 list
   :: (MonadHttp m, Client c)
-  => c -> ListParams -> m (SlackApiResponse Conversations)
+  => c -> ListParams -> m (WebApiResponse Conversations)
 list client = buildGetApi client (buildUrl client "list") . buildRequestParams
 
 type Members = Record
@@ -183,7 +183,7 @@ members
   => c
   -> Slack.ChannelID
   -> MembersParams
-  -> m (SlackApiResponse Members)
+  -> m (WebApiResponse Members)
 members client cid =
   buildGetApi client (buildUrl client "members") . ("channel" =: cid <>) . buildRequestParams
 
@@ -203,7 +203,7 @@ open
   :: (MonadHttp m, Client c)
   => c
   -> OpenParams
-  -> m (SlackApiResponse OpenResult)
+  -> m (WebApiResponse OpenResult)
 open client = buildPostApi client (buildUrl client "open") . buildRequestParams
 
 rename
@@ -211,7 +211,7 @@ rename
   => c
   -> Slack.ChannelID
   -> Text
-  -> m (SlackApiResponse (Record '[ "channel" >: Slack.Conversation ]))
+  -> m (WebApiResponse (Record '[ "channel" >: Slack.Conversation ]))
 rename client cid name =
   buildPostApi client (buildUrl client "rename") ("channel" =: cid <> "name" =: name)
 
@@ -229,7 +229,7 @@ replies
   -> Slack.ChannelID
   -> Slack.TimeStamp
   -> RepliesParams
-  -> m (SlackApiResponse Replies)
+  -> m (WebApiResponse Replies)
 replies client cid ts =
   buildGetApi client (buildUrl client "replies") .
     ("channel" =: cid <>) . ("ts" =: ts <>) . buildRequestParams
@@ -239,7 +239,7 @@ setPurpose
   => c
   -> Slack.ChannelID
   -> Text
-  -> m (SlackApiResponse (Record '[ "purpose" >: Text ]))
+  -> m (WebApiResponse (Record '[ "purpose" >: Text ]))
 setPurpose client cid purpose =
   buildPostApi client (buildUrl client "setPurpose") ("channel" =: cid <> "purpose" =: purpose)
 
@@ -248,7 +248,7 @@ setTopic
   => c
   -> Slack.ChannelID
   -> Text
-  -> m (SlackApiResponse (Record '[ "topic" >: Text ]))
+  -> m (WebApiResponse (Record '[ "topic" >: Text ]))
 setTopic client cid topic =
   buildPostApi client (buildUrl client "setTopic") ("channel" =: cid <> "topic" =: topic)
 
@@ -256,6 +256,6 @@ unarchive
   :: (MonadHttp m, Client c)
   => c
   -> Slack.ChannelID
-  -> m (SlackApiResponse (Record '[ "ok" >: Bool ]))
+  -> m (WebApiResponse (Record '[ "ok" >: Bool ]))
 unarchive client cid =
   buildPostApi client (buildUrl client "unarchive") ("channel" =: cid)

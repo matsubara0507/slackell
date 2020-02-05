@@ -1,7 +1,7 @@
 module Web.Slack.WebAPI
-    ( SlackApiResponse
+    ( WebApiResponse
     , NextCursor
-    , run
+    , runWebApi
     ) where
 
 import           Control.Monad.IO.Class    (MonadIO)
@@ -10,10 +10,10 @@ import           Data.Text                 (Text)
 import           Network.HTTP.Req          (Req, defaultHttpConfig,
                                             responseBody, runReq)
 import           Web.Slack.Type            (Ok (..))
-import           Web.Slack.WebAPI.Internal (NextCursor, SlackApiResponse)
+import           Web.Slack.WebAPI.Internal (NextCursor, WebApiResponse)
 
-run :: (MonadIO m, FromJSON r) => Req (SlackApiResponse r) -> m (Either Text r)
-run request = runReq defaultHttpConfig $ do
+runWebApi :: (MonadIO m, FromJSON r) => Req (WebApiResponse r) -> m (Either Text r)
+runWebApi request = runReq defaultHttpConfig $ do
   result <- request
   pure $ case responseBody result of
     Ok r  -> Right r

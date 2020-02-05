@@ -43,16 +43,16 @@ type ConversationsParams = OptionalParams
 
 conversations
   :: (MonadHttp m, Client c)
-  => c -> ConversationsParams -> m (SlackApiResponse Conversations)
+  => c -> ConversationsParams -> m (WebApiResponse Conversations)
 conversations client =
   buildGetApi client (buildUrl client "conversations") . buildRequestParams
 
-deletePhoto :: (MonadHttp m, Client c) => c -> m (SlackApiResponse (Record '[ "ok" >: Bool ]))
+deletePhoto :: (MonadHttp m, Client c) => c -> m (WebApiResponse (Record '[ "ok" >: Bool ]))
 deletePhoto client = buildPostApi client (buildUrl client "deletePhoto") mempty
 
 getPresence
   :: (MonadHttp m, Client c)
-  => c -> Slack.UserID -> m (SlackApiResponse (Record '[ "presence" >: Presence ]))
+  => c -> Slack.UserID -> m (WebApiResponse (Record '[ "presence" >: Presence ]))
 getPresence client uid =
   buildGetApi client (buildUrl client "getPresence") ("user" =: uid)
 
@@ -61,7 +61,7 @@ type IdentityResult = Record
    , "team" >: Slack.TeamIdentity
    ]
 
-identity :: (MonadHttp m, Client c) => c -> m (SlackApiResponse IdentityResult)
+identity :: (MonadHttp m, Client c) => c -> m (WebApiResponse IdentityResult)
 identity client = buildGetApi client (buildUrl client "identity") mempty
 
 type InfoParams = OptionalParams
@@ -70,7 +70,7 @@ type InfoParams = OptionalParams
 
 info
   :: (MonadHttp m, Client c)
-  => c -> Slack.UserID -> InfoParams -> m (SlackApiResponse (Record '[ "user" >: Slack.User ]))
+  => c -> Slack.UserID -> InfoParams -> m (WebApiResponse (Record '[ "user" >: Slack.User ]))
 info client uid =
   buildGetApi client (buildUrl client "info") . ("user" =: uid <>) . buildRequestParams
 
@@ -88,19 +88,19 @@ type ListParams = OptionalParams
 
 list
   :: (MonadHttp m, Client c)
-  => c -> ListParams -> m (SlackApiResponse Users)
+  => c -> ListParams -> m (WebApiResponse Users)
 list client =
   buildGetApi client (buildUrl client "list") . buildRequestParams
 
 lookupByEmail
   :: (MonadHttp m, Client c)
-  => c -> Text -> m (SlackApiResponse (Record '[ "user" >: Slack.User ]))
+  => c -> Text -> m (WebApiResponse (Record '[ "user" >: Slack.User ]))
 lookupByEmail client email =
   buildGetApi client (buildUrl client "lookupByEmail") ("email" =: email)
 
 setActive, setPresenceAway, setPresenceAuto
   :: (MonadHttp m, Client c)
-  => c -> m (SlackApiResponse (Record '[ "ok" >: Bool ]))
+  => c -> m (WebApiResponse (Record '[ "ok" >: Bool ]))
 setActive client =
   buildPostApi client (buildUrl client "setActive") mempty
 setPresenceAway client =
