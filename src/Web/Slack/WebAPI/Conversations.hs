@@ -82,7 +82,7 @@ type Messages = Record
   '[ "messages"          >: [Slack.Message]
    , "has_more"          >: Bool
    , "pin_count"         >: Int
-   , "response_metadata" >: Record NextCursor
+   , "response_metadata" >: Maybe (Record NextCursor)
    ]
 
 type HistoryParams = OptionalParams
@@ -153,7 +153,7 @@ leave client cid =
 
 type Conversations = Record
   '[ "channels"          >: [Slack.Conversation]
-   , "response_metadata" >: Record NextCursor
+   , "response_metadata" >: Maybe (Record NextCursor)
    ]
 
 type ListParams = OptionalParams
@@ -170,7 +170,7 @@ list client = buildGetApi client (buildUrl client "list") . buildRequestParams
 
 type Members = Record
   '[ "members"           >: [Slack.UserID]
-   , "response_metadata" >: Record NextCursor
+   , "response_metadata" >: Maybe (Record NextCursor)
    ]
 
 type MembersParams = OptionalParams
@@ -218,7 +218,7 @@ rename client cid name =
 type Replies = Record
   '[ "messages"          >: [Slack.Message]
    , "has_more"          >: Bool
-   , "response_metadata" >: Record NextCursor
+   , "response_metadata" >: Maybe (Record NextCursor)
    ]
 
 type RepliesParams = HistoryParams
