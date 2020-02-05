@@ -170,7 +170,7 @@ toDirectMessage conv = hsequence
 
 type Message = Record
   '[ "type"           >: Text
-   , "user"           >: UserID
+   , "user"           >: Maybe UserID
    , "text"           >: Text
    , "thread_ts"      >: Maybe TimeStamp
    , "parent_user_id" >: Maybe UserID
