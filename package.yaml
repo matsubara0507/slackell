@@ -40,12 +40,14 @@ dependencies:
 - aeson
 - base >= 4.7 && < 5
 - bytestring
+- cryptonite
 - extensible >= 0.6.0
+- memory
+- microlens
 - req >= 2.0.0
 - simple-api
 - text
 - unordered-containers
-- microlens
 
 library:
   source-dirs: src

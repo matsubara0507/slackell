@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 5e8b1313d9aadaeb3a2d047d4c57afaa4620a86e92a707543d397ae4a4eee12c
+-- hash: 70912dc5926afe30e82ea496c9f1726def763b2c9bdecc8deb616317b6a3dfda
 
 name:           slackell
 version:        0.1.0
@@ -26,6 +26,7 @@ library
       Web.Slack
       Web.Slack.Client
       Web.Slack.Type
+      Web.Slack.Verify
       Web.Slack.WebAPI
       Web.Slack.WebAPI.Conversations
       Web.Slack.WebAPI.Internal
@@ -40,7 +41,9 @@ library
       aeson
     , base >=4.7 && <5
     , bytestring
+    , cryptonite
     , extensible >=0.6.0
+    , memory
     , microlens
     , req >=2.0.0
     , simple-api
@@ -52,6 +55,7 @@ test-suite spec
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      Spec.Web.Slack.Verify
       Spec.Web.Slack.WebAPI.Conversations
       Spec.Web.Slack.WebAPI.Users
       Web.Slack.Test.Client
@@ -67,7 +71,9 @@ test-suite spec
       aeson
     , base >=4.7 && <5
     , bytestring
+    , cryptonite
     , extensible >=0.6.0
+    , memory
     , microlens
     , req >=2.0.0
     , servant-server
