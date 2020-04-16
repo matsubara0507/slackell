@@ -4,4 +4,5 @@ module Web.Slack
 
 import           Web.Slack.Client as X
 import           Web.Slack.Type   as X
+import           Web.Slack.Verify as X
 import           Web.Slack.WebAPI as X

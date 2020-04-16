@@ -1,12 +1,12 @@
-name:                slackell
+name:                extensible-http-api-data
 version:             0.1.0
-homepage:            https://github.com/matsubara0507/slackell#readme
+homepage:            https://github.com/matsubara0507/extensible-http-api-data#readme
 license:             MIT
 author:              MATSUBARA Nobutada
 maintainer:          t12307043@gunma-u.ac.jp
 copyright:           MATSUBARA Nobutada
 category:            Web
-description:         Please see the README on GitHub at <https://github.com/matsubara0507/slackell#readme>
+description:         Please see the README on GitHub at <https://github.com/matsubara0507/extensible-http-api-data#readme>
 
 extra-source-files:
 - README.md
@@ -25,46 +25,20 @@ default-extensions:
 - FlexibleContexts
 - FlexibleInstances
 - GeneralizedNewtypeDeriving
-- LambdaCase
-- OverloadedLabels
 - OverloadedStrings
 - PolyKinds
 - RankNTypes
 - StandaloneDeriving
-- TupleSections
 - TypeApplications
 - TypeFamilies
 - TypeOperators
 - TypeSynonymInstances
 
 dependencies:
-- aeson
 - base >= 4.7 && < 5
-- base64-bytestring-type
-- bytestring
-- cryptonite
 - extensible >= 0.6.0
-- extensible-http-api-data
 - http-api-data
-- http-media
-- memory
-- microlens
-- req >= 2.0.0
-- servant >= 0.4.0
-- simple-api
 - text
-- unordered-containers
 
 library:
   source-dirs: src
-
-tests:
-  spec:
-    main:                Spec.hs
-    source-dirs:         test
-    dependencies:
-    - slackell
-    - servant-server
-    - tasty
-    - tasty-hspec
-    - warp

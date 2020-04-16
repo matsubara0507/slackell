@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 5e8b1313d9aadaeb3a2d047d4c57afaa4620a86e92a707543d397ae4a4eee12c
+-- hash: 9dcc686f0f4ec59d0128b16b6d8edb50ec97acab689dddaf25f0592425a60de9
 
 name:           slackell
 version:        0.1.0
@@ -25,7 +25,9 @@ library
   exposed-modules:
       Web.Slack
       Web.Slack.Client
+      Web.Slack.SlashCommand
       Web.Slack.Type
+      Web.Slack.Verify
       Web.Slack.WebAPI
       Web.Slack.WebAPI.Conversations
       Web.Slack.WebAPI.Internal
@@ -34,15 +36,22 @@ library
       Paths_slackell
   hs-source-dirs:
       src
-  default-extensions: ConstraintKinds DataKinds FlexibleContexts FlexibleInstances GeneralizedNewtypeDeriving LambdaCase OverloadedLabels OverloadedStrings PolyKinds RankNTypes StandaloneDeriving TypeApplications TypeFamilies TypeOperators TypeSynonymInstances
+  default-extensions: ConstraintKinds DataKinds FlexibleContexts FlexibleInstances GeneralizedNewtypeDeriving LambdaCase OverloadedLabels OverloadedStrings PolyKinds RankNTypes StandaloneDeriving TupleSections TypeApplications TypeFamilies TypeOperators TypeSynonymInstances
   ghc-options: -Wall -Wcompat -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints
   build-depends:
       aeson
     , base >=4.7 && <5
+    , base64-bytestring-type
     , bytestring
+    , cryptonite
     , extensible >=0.6.0
+    , extensible-http-api-data
+    , http-api-data
+    , http-media
+    , memory
     , microlens
     , req >=2.0.0
+    , servant >=0.4.0
     , simple-api
     , text
     , unordered-containers
@@ -52,6 +61,7 @@ test-suite spec
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      Spec.Web.Slack.Verify
       Spec.Web.Slack.WebAPI.Conversations
       Spec.Web.Slack.WebAPI.Users
       Web.Slack.Test.Client
@@ -61,15 +71,22 @@ test-suite spec
       Paths_slackell
   hs-source-dirs:
       test
-  default-extensions: ConstraintKinds DataKinds FlexibleContexts FlexibleInstances GeneralizedNewtypeDeriving LambdaCase OverloadedLabels OverloadedStrings PolyKinds RankNTypes StandaloneDeriving TypeApplications TypeFamilies TypeOperators TypeSynonymInstances
+  default-extensions: ConstraintKinds DataKinds FlexibleContexts FlexibleInstances GeneralizedNewtypeDeriving LambdaCase OverloadedLabels OverloadedStrings PolyKinds RankNTypes StandaloneDeriving TupleSections TypeApplications TypeFamilies TypeOperators TypeSynonymInstances
   ghc-options: -Wall -Wcompat -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints
   build-depends:
       aeson
     , base >=4.7 && <5
+    , base64-bytestring-type
     , bytestring
+    , cryptonite
     , extensible >=0.6.0
+    , extensible-http-api-data
+    , http-api-data
+    , http-media
+    , memory
     , microlens
     , req >=2.0.0
+    , servant >=0.4.0
     , servant-server
     , simple-api
     , slackell
