@@ -1,0 +1,5 @@
+packages:
+  ./
+  ../
+  ../lib/simple-api
+  ../lib/extensible-http-api-data

@@ -42,3 +42,8 @@ jobs:
       run: |
         cabal v2-build
         cabal v2-test
+
+    - name: Build example
+      run: |
+        cd example
+        cabal v2-build

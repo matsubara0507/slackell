@@ -1,8 +1,4 @@
 packages:
   ./
   lib/simple-api
-
-source-repository-package
-  type: git
-  location: https://github.com/fumieval/extensible
-  tag: d197daaef0ae18b9734384b8f0efa5783bc629e9
+  lib/extensible-http-api-data
