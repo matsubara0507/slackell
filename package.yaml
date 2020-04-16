@@ -50,7 +50,7 @@ dependencies:
 - memory
 - microlens
 - req >= 2.0.0
-- servant
+- servant >= 0.4.0
 - simple-api
 - text
 - unordered-containers

@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 2434b3a05886a7119d15ef832b580805a29ba5bc5c762de605f64da25a59ebd3
+-- hash: 9dcc686f0f4ec59d0128b16b6d8edb50ec97acab689dddaf25f0592425a60de9
 
 name:           slackell
 version:        0.1.0
@@ -51,7 +51,7 @@ library
     , memory
     , microlens
     , req >=2.0.0
-    , servant
+    , servant >=0.4.0
     , simple-api
     , text
     , unordered-containers
@@ -86,7 +86,7 @@ test-suite spec
     , memory
     , microlens
     , req >=2.0.0
-    , servant
+    , servant >=0.4.0
     , servant-server
     , simple-api
     , slackell
