@@ -1,3 +1,5 @@
+-- | ref: https://api.slack.com/authentication/verifying-requests-from-slack
+
 module Web.Slack.Verify
     ( SigningSecret
     , RequestTimestamp
