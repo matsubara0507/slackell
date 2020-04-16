@@ -1,0 +1,40 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.2.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: aaff8c5a19b01e47c901ab4e23f988e3ccdcefbf568ce836dfac8c32883b1cfb
+
+name:           slackell-example
+version:        0.1.0
+category:       Web
+author:         MATSUBARA Nobutada
+maintainer:     t12307043@gunma-u.ac.jp
+copyright:      MATSUBARA Nobutada
+license:        MIT
+build-type:     Simple
+
+executable app
+  main-is: Main.hs
+  other-modules:
+      Paths_slackell_example
+  hs-source-dirs:
+      src
+  default-extensions: ConstraintKinds DataKinds FlexibleContexts FlexibleInstances GeneralizedNewtypeDeriving LambdaCase OverloadedLabels OverloadedStrings PolyKinds RankNTypes StandaloneDeriving TypeApplications TypeFamilies TypeOperators TypeSynonymInstances
+  ghc-options: -Wall -Wcompat -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints
+  build-depends:
+      aeson
+    , base >=4.7 && <5
+    , bytestring
+    , cryptonite
+    , extensible >=0.6.0
+    , microlens
+    , mtl
+    , servant
+    , servant-server
+    , slackell
+    , text
+    , unordered-containers
+    , warp
+  default-language: Haskell2010

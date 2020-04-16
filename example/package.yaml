@@ -1,0 +1,51 @@
+name:                slackell-example
+version:             0.1.0
+license:             MIT
+author:              MATSUBARA Nobutada
+maintainer:          t12307043@gunma-u.ac.jp
+copyright:           MATSUBARA Nobutada
+category:            Web
+
+ghc-options:
+- -Wall
+- -Wcompat
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wredundant-constraints
+
+default-extensions:
+- ConstraintKinds
+- DataKinds
+- FlexibleContexts
+- FlexibleInstances
+- GeneralizedNewtypeDeriving
+- LambdaCase
+- OverloadedLabels
+- OverloadedStrings
+- PolyKinds
+- RankNTypes
+- StandaloneDeriving
+- TypeApplications
+- TypeFamilies
+- TypeOperators
+- TypeSynonymInstances
+
+dependencies:
+- aeson
+- base >= 4.7 && < 5
+- bytestring
+- cryptonite
+- extensible >= 0.6.0
+- microlens
+- mtl
+- servant
+- servant-server
+- slackell
+- text
+- unordered-containers
+- warp
+
+executables:
+  app:
+    main: Main.hs
+    source-dirs: src
